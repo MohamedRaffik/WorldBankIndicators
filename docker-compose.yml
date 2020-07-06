@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mysql:
+    container_name: WB_MySQL
+    image: mysql
+    volumes: 
+      - ./sql:/docker-entrypoint-initdb.d
+    environment: 
+      MYSQL_ROOT_PASSWORD: frontier
+      MYSQL_DATABASE: worldbankindicators
+      MYSQL_USER: frontier
+      MYSQL_PASSWORD: frontier
+    ports: 
+      - "3306:3306"
