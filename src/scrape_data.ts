@@ -23,20 +23,18 @@ import csvparser from 'csv-parse';
       delete row['Indicator Name'];
       delete row['Indicator Code'];
 
-      const new_indicator = await Indicator.create({ name: indicator_name });
+      const [new_indicator] = await Indicator.findOrCreate({
+        where: { name: indicator_name, code: indicator_code }
+      }); 
 
       for (const year in row) {
         if (!row[year]) {
           continue;
         }
-        const created_indicator_info = await IndicatorInformation.findOne({ where: { indicator: new_indicator.id, year: Number(year) } });
-        if (!created_indicator_info) {
-          await IndicatorInformation.create({ 
-            indicator: new_indicator.id, 
-            year: Number(year), 
-            value: Number(row[year])
-          });
-        }
+        await IndicatorInformation.findOrCreate({
+          where: { indicator_id: new_indicator.id, year: Number(year) },
+          defaults: { indicator_id: new_indicator.id, year: Number(year), value: Number(row[year]) }
+        });
       }
 
       // Split parts of code into there respective names
@@ -45,31 +43,22 @@ import csvparser from 'csv-parse';
       const [ topic_code, general_subject_code ] = code_parts;
       
       // Create topic if the topic does not already exist
-      let created_topic = await Topic.findOne({ where: { code: topic_code } });
-      if (!created_topic) {
-        created_topic = await Topic.create({ code: topic_code, name: '' });
-      }
+      const [created_topic] = await Topic.findOrCreate({
+        where: { code: topic_code },
+        defaults: { code: topic_code, name: '' }
+      });
 
       // Create the general subject if the general subject does not already exist
-      let created_general_subject = await GeneralSubject.findOne({ 
-        where: { code: general_subject_code, topic: created_topic.id } 
+      const [created_general_subject] = await GeneralSubject.findOrCreate({
+        where: { code: general_subject_code, topic_id: created_topic.id },
+        defaults: { code: general_subject_code, topic_id: created_topic.id, name: '' }
       });
-      if (!created_general_subject) {
-        created_general_subject = await GeneralSubject.create({ code: general_subject_code, topic: created_topic.id, name: '' });
-      }
 
-      // Create the specific subject if the specific subject does not exist
-      // Add indicator to subject if the code ends in the specific subject
-      let created_specific_subject = await SpecificSubject.findOne({ 
-        where: { code: specific_subject_code, general_subject: created_general_subject.id } 
+      // Create the specific subject if the specific subject does not exist and add indicator
+      await SpecificSubject.findOrCreate({
+        where: { code: specific_subject_code, general_subject_id: created_general_subject.id },
+        defaults: { code: specific_subject_code, general_subject_id: created_general_subject.id, indicator_id: new_indicator.id }
       });
-      if (!created_specific_subject) {
-        created_specific_subject = await SpecificSubject.create({ 
-          code: specific_subject_code, 
-          general_subject: created_general_subject.id, 
-          indicator: new_indicator.id
-        })
-      }
 
       console.log(`Created new indicator: ${indicator_name}`)
     } catch (err) {
