@@ -3,7 +3,7 @@ import { searchIndicators, getAllTopics, getAllGeneralSubjects, getIndicatorInfo
 
 const router = Router();
 
-router.get('/query', searchIndicators);
+router.get('/indicators', searchIndicators);
 router.get('/topics', getAllTopics);
 router.get('/topics/:topic_id/generalsubjects', getAllGeneralSubjects);
 router.get('/indicator/:indicator_id/info', getIndicatorInformation);

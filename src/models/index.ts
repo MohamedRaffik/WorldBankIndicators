@@ -174,7 +174,7 @@ SpecificSubject.init(
   }
 );
 
-Indicator.hasMany(IndicatorInformation, { sourceKey: 'id', foreignKey: 'indicator_id' })
+Indicator.hasMany(IndicatorInformation, { sourceKey: 'id', foreignKey: 'indicator_id' });
 Indicator.hasOne(SpecificSubject, { sourceKey: 'id', foreignKey: 'indicator_id' });
 
 IndicatorInformation.belongsTo(Indicator, { foreignKey: 'indicator_id' });
