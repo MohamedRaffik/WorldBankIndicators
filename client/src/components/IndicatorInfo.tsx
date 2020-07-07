@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, TableRow, TableCell, TableContainer, TableHead, TableBody, Table, Dialog, DialogTitle } from '@material-ui/core';
+import { Grid, TableRow, TableCell, TableContainer, TableHead, TableBody, Table, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 
 interface IndicatorInfoProps {
@@ -72,7 +72,7 @@ export const IndicatorInfoDialog = (props: IndicatorInfoProps) => {
           <p>Years Recorded {IndicatorInfo.oldest_recorded_year} - {IndicatorInfo.last_recorded_year}</p>
         </Grid>
       </DialogTitle>
-      <Grid container direction={'column'} style={{ padding: '1em' }}>
+      <DialogContent>
         <Grid item>
           <TableContainer>
             <Table>
@@ -88,16 +88,16 @@ export const IndicatorInfoDialog = (props: IndicatorInfoProps) => {
             </Table>
           </TableContainer>
         </Grid>
-        <Grid container justify={'center'} alignItems={'center'} style={{ padding: '1em' }}>
-          <Pagination
-              style={{ display: IndicatorInfo.total_pages <= 1 ? 'none' : 'initial' }}
-              page={currentPage} 
-              count={IndicatorInfo.total_pages} 
-              onChange={(event, value) => updateCurrentPage(value)} 
-              color={'primary'}
-            />
-        </Grid>
-      </Grid>   
+      </DialogContent>
+      <Grid container justify={'center'} alignItems={'center'} style={{ padding: '1em' }}>
+        <Pagination
+            style={{ display: IndicatorInfo.total_pages <= 1 ? 'none' : 'initial' }}
+            page={currentPage} 
+            count={IndicatorInfo.total_pages} 
+            onChange={(event, value) => updateCurrentPage(value)} 
+            color={'primary'}
+          />
+      </Grid> 
     </Dialog>
   );
 }
