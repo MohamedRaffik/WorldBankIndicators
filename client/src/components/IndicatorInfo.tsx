@@ -62,6 +62,7 @@ export const IndicatorInfoDialog = (props: IndicatorInfoProps) => {
       open={props.open} 
       onClose={props.onClose} 
       fullWidth={true}
+      scroll={'paper'}
     >
       <DialogTitle>
         <Grid item>
