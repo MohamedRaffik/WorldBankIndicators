@@ -5,10 +5,9 @@ import {
   GeneralSubject, 
   SpecificSubject, 
 } from './models';
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 import csvparser from 'csv-parse';
-
 
 (async() => {
   const file = path.resolve(__dirname, '../Frontier Programming Challenge/World Bank-CHN.csv');

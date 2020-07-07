@@ -5,9 +5,14 @@
   "main": "index.js",
   "scripts": {
     "scrape": "ts-node -r dotenv/config src/scrape_data.ts",
+    "build:server": "tsc --build tsconfig.json",
+    "build:client": "npm run --prefix client build",
+    "build": "npm run build:server && npm run build:client",
+    "start": "npm run build && node -r dotenv/config dist/index.js",
     "dev:server": "ts-node-dev -r dotenv/config src/index.ts",
     "dev:client": "BROWSER=vivaldi-stable npm run --prefix client start",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "install:all": "npm run install && npm run --prefix client install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
