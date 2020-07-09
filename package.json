@@ -1,7 +1,7 @@
 {
   "name": "worldbankindicators",
   "version": "1.0.0",
-  "description": "- Not enforcing max depth of 3 in extensions (can do so with an additional column [depth] and check constraint)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "scrape": "ts-node -r dotenv/config src/scrape_data.ts",
