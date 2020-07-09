@@ -24,6 +24,7 @@ export const IndicatorList = (props: IndicatorListProps) => {
   const [openModal, updateOpenModal] = React.useState(false);
   
   const queryIndicators = async () => {
+    if (props.query.length < 3 && props.query !== '') return;
     try {
       const response = await fetch(`/api/indicators?query=${props.query}&topic=${props.currentTopicFilter}&general_subject=${props.currentGeneralSubjectFilter}&page=${currentPage}`);
       const body = await response.json();
