@@ -18,6 +18,8 @@
 
 # Running Locally
 
+- Prior to running the application the data must be scraped from the `World Bank.csv` file, in order to do so you must run `npm run scrape`
+
 ## Development
 - To run both Server and Client in development mode run the command `npm run dev`
 - Server and Client can run independently with their or npm commands
