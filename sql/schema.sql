@@ -1,7 +1,7 @@
 CREATE TABLE indicators (
   id INT AUTO_INCREMENT,
   name TEXT,
-  code TEXT,
+  code VARCHAR(25) UNIQUE,
   PRIMARY KEY(id)
 );
 
@@ -35,7 +35,6 @@ CREATE TABLE specific_subjects (
   code VARCHAR(20),
   indicator_id INT UNIQUE REFERENCES indicators(id),
   general_subject_id INT REFERENCES general_subjects(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  PRIMARY KEY(id),
-  CONSTRAINT uc UNIQUE(code, general_subject_id)
+  PRIMARY KEY(id)
 );
 

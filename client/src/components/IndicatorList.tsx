@@ -86,6 +86,7 @@ export const IndicatorList = (props: IndicatorListProps) => {
         </TableContainer>  
       </Grid>
       <Grid container justify={'center'} alignItems={'center'} style={{ padding: '1em' }}>
+        { IndicatorRows.length === 0 ? <h4>No Indicators Found</h4> : null }
         <Pagination
           style={{ display: Indicators.total_pages <= 1 ? 'none' : 'initial' }}
           page={currentPage} 

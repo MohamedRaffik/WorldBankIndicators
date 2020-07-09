@@ -47,8 +47,10 @@ export const IndicatorInfoDialog = (props: IndicatorInfoProps) => {
   }, [props.indicator.id]);
 
   React.useEffect(() => {
-    retrieveInfo();
-  }, [props.indicator.id, currentPage]);
+    if (props.open) {
+      retrieveInfo();
+    }
+  }, [props.indicator.id, currentPage, props.open]);
 
   const IndicatorInfoRows = IndicatorInfo.list.map(indicatorInfo => (
     <TableRow key={indicatorInfo.id}>
