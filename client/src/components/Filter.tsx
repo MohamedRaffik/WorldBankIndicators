@@ -55,8 +55,10 @@ export const ListFilter = (props: ListFilterProps) => {
   }, [displayList]);
 
   React.useEffect(() => { 
-    updateListState(currentPage);
-  }, [currentPage, ...props.retrieveListDependencies]);
+    if (displayList) {
+      updateListState(currentPage);
+    }
+  }, [currentPage, ...props.retrieveListDependencies, displayList]);
 
   const checkboxes = React.useMemo(() => {
     const a: JSX.Element[] = [];
