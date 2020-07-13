@@ -36,7 +36,7 @@ import { ResultSetHeader, RowDataPacket } from 'mysql2';
       }
 
       for (const year in row) {
-        if (!row[year]) {
+        if (!row[year] && row[year] !== 0) {
           continue;
         }
         const [new_indicator_information] = await promisePool.query(
