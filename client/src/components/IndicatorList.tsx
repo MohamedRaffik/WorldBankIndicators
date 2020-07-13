@@ -58,7 +58,7 @@ export const IndicatorList = (props: IndicatorListProps) => {
   ));
 
   const IndicatorModal = (
-    Indicators.list.length !== 0 ?
+    Indicators.list.length !== 0 && Indicators.list[currentIndicator] ?
       <IndicatorInfoDialog
         indicator={Indicators.list[currentIndicator]}
         open={openModal}

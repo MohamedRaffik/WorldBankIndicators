@@ -116,7 +116,7 @@ export const queryGeneralSubjects = async (topic_id: number, page: number, items
 
   const [general_subjects] = await promisePool.query(
     'SELECT general_subjects.id, general_subjects.code, general_subjects.name FROM general_subjects WHERE general_subjects.topic_id = ? ORDER BY general_subjects.id ASC LIMIT ? OFFSET ?',
-    [topic_id, 25, calcOffset(25, page)]
+    [topic_id, items_amount, calcOffset(items_amount, page)]
   );
   results.rows = (general_subjects as RowDataPacket[]);
   const [general_subjects_count] = await promisePool.query(
@@ -139,7 +139,7 @@ export const queryIndicatorInformation = async (indicator_id: number, page: numb
   const [indicator_information] = await promisePool.query(
     'SELECT indicator_information.id, indicator_information.year, indicator_information.value FROM indicator_information \
     WHERE indicator_information.indicator_id = ? ORDER BY indicator_information.year LIMIT ? OFFSET ?',
-    [indicator_id, 10, calcOffset(10, page)]
+    [indicator_id, items_amount, calcOffset(items_amount, page)]
   );
   results.rows = (indicator_information as RowDataPacket[]);
   const [indicator_information_count] = await promisePool.query(
