@@ -143,7 +143,7 @@ export const queryIndicatorInformation = async (indicator_id: number, page: numb
   );
   results.rows = (indicator_information as RowDataPacket[]);
   const [indicator_information_count] = await promisePool.query(
-    'SELECT indicator_information.id, indicator_information.year, indicator_information.value FROM indicator_information \
+    'SELECT COUNT(indicator_information.id) as count FROM indicator_information \
     WHERE indicator_information.indicator_id = ?',
     [indicator_id]
   );

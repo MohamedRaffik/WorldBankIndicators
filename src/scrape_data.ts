@@ -75,8 +75,8 @@ import { ResultSetHeader, RowDataPacket } from 'mysql2';
 
       let created_general_subject_id: number;
       const [created_general_subject] = await promisePool.query(
-        'SELECT id FROM general_subjects WHERE code = ?',
-        [general_subject_code]
+        'SELECT id FROM general_subjects WHERE code = ? AND topic_id = ?',
+        [general_subject_code, created_topic_id]
       ); 
       const created_general_subject_rows = (created_general_subject as RowDataPacket[]);
       if (created_general_subject_rows.length === 0) {

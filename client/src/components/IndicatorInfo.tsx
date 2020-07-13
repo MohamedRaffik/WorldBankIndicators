@@ -64,7 +64,6 @@ export const IndicatorInfoDialog = (props: IndicatorInfoProps) => {
       open={props.open} 
       onClose={props.onClose} 
       fullWidth={true}
-      scroll={'paper'}
     >
       <DialogTitle>
         <Grid item>
@@ -93,12 +92,12 @@ export const IndicatorInfoDialog = (props: IndicatorInfoProps) => {
       </DialogContent>
       <Grid container justify={'center'} alignItems={'center'} style={{ padding: '1em' }}>
         <Pagination
-            style={{ display: IndicatorInfo.total_pages <= 1 ? 'none' : 'initial' }}
-            page={currentPage} 
-            count={IndicatorInfo.total_pages} 
-            onChange={(event, value) => updateCurrentPage(value)} 
-            color={'primary'}
-          />
+          style={{ display: IndicatorInfo.total_pages <= 1 ? 'none' : 'initial' }}
+          page={currentPage} 
+          count={IndicatorInfo.total_pages} 
+          onChange={(event, value) => updateCurrentPage(value)} 
+          color={'primary'}
+        />
       </Grid> 
     </Dialog>
   );
